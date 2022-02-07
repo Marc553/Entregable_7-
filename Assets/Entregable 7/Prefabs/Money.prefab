@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8579601760346558082}
   m_Layer: 0
   m_Name: Money
-  m_TagString: Money
+  m_TagString: recolectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
