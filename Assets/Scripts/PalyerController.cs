@@ -32,9 +32,9 @@ public class PalyerController : MonoBehaviour
     void Update()
     {
         //Ejecuta la acción de ejercer fuerza cuando se pulsa el espacio 
-        if (Input.GetKey(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {
-            playerRigidbody.AddForce(Vector3.up * playerSpeed); //fuerza ejercida al player hacia arriba
+            playerRigidbody.AddForce(Vector3.up * playerSpeed,ForceMode.Impulse); //fuerza ejercida al player hacia arriba
             playerAudioSource.PlayOneShot(boingClip, 1);
         }
 
