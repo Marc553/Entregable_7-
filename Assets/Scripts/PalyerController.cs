@@ -8,8 +8,7 @@ public class PalyerController : MonoBehaviour
     private Rigidbody playerRigidbody;  //rigidbody del player 
     private float yRange = 0.23f; //limite del suelo donde se acaba el juego 
    
-    
-    private bool gameOver; // se acaba todo 
+   
     public int recolectables = 0; //numero de recolectables recogidos
     
     
@@ -24,7 +23,7 @@ public class PalyerController : MonoBehaviour
 
     void Start()
     {
-        gameOver = false;
+        
         playerRigidbody = GetComponent<Rigidbody>(); //entra en la componente rigidbody del player 
         playerAudioSource = GetComponent<AudioSource>();
     }
@@ -47,23 +46,28 @@ public class PalyerController : MonoBehaviour
 
     }
 
-    /*private void OntriggerEnter(Collider otherCollider)
+    private void OnTriggerEnter(Collider otherCollider)
     {
         //Si se choca con el objeto con la etiqueta llamada "recolectable" suma 1 al recolectable
         if(otherCollider.gameObject.CompareTag("recolectable"))
         {
             recolectables++;
             Debug.Log(recolectables);
-           playerAudioSource.PlayOneShot(boingClip, 1);
+           //playerAudioSource.PlayOneShot(boingClip, 1);
+        }
+
+        if(otherCollider.gameObject.CompareTag("ground"))
+        {
+            Debug.Log("funciono");
         }
     
-        if(otherCollider.gameObject.CompareTag("bomba"))
+        /*if(otherCollider.gameObject.CompareTag("bomba"))
         {
            playerAudioSource.PlayerOneShot(boomClip, 1);
            Time.timeScale = 0;
            
-        }
-    }*/
+        }*/
+    }
 
 
 

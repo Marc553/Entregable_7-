@@ -8,6 +8,7 @@ TagManager:
   - Bomb
   - Background
   - recolectable
+  - ground
   layers:
   - Default
   - TransparentFX
