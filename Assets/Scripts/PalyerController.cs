@@ -19,11 +19,14 @@ public class PalyerController : MonoBehaviour
 
     public ParticleSystem particleRecolectable;  //particulas recolectable
     public ParticleSystem particleExprosion;  //particulas explosión
+
+    public bool gameOver;
  
 
     void Start()
     {
-        
+           
+        gameOver = false;
         playerRigidbody = GetComponent<Rigidbody>(); //entra en la componente rigidbody del player 
         playerAudioSource = GetComponent<AudioSource>(); //entra en la componente audio source del player
     }
@@ -31,30 +34,42 @@ public class PalyerController : MonoBehaviour
   
     void Update()
     {
-        //Ejecuta la acción de ejercer fuerza cuando se pulsa el espacio 
+        if(!gameOver)
+        { 
+            //Ejecuta la acción de ejercer fuerza cuando se pulsa el espacio 
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
             playerRigidbody.AddForce(Vector3.up * playerSpeed,ForceMode.Impulse); //fuerza ejercida al player hacia arriba
             playerAudioSource.PlayOneShot(boingClip, 1); //reproduce una vez el audio de salto 
         }
 
+        }
+         
         //Si el player pasa esta posición el juego se acaba (es el suelo)
         if (transform.position.y < yRange) 
         {
-            Time.timeScale = 0;
+            gameOver = true;
         }
+
+        if(gameOver)
+        {
+            
+        }
+       
 
     }
 
     private void OnTriggerEnter(Collider otherCollider)
     {
-        //Si se choca con el objeto con la etiqueta llamada "recolectable" suma 1 al recolectable y reproduce el audio de recolectable
+        if(!gameOver)
+        { 
+            //Si se choca con el objeto con la etiqueta llamada "recolectable" suma 1 al recolectable y reproduce el audio de recolectable
         if(otherCollider.gameObject.CompareTag("recolectable"))
         {
             recolectables++;
            playerAudioSource.PlayOneShot(blipClip, 1);
             particleRecolectable.Play();
-            Destroy(otherCollider);
+            Destroy(otherCollider.gameObject);
         }
      
         // Si se choca con el objetocon la etiqueta llamada "exprosion" reproduce el audio de explosion y acaba el juego 
@@ -62,10 +77,18 @@ public class PalyerController : MonoBehaviour
         {
            playerAudioSource.PlayOneShot(boomClip, 1);
             particleExprosion.Play();
-            Destroy(otherCollider);
+            Destroy(otherCollider.gameObject);
+            gameOver = true;
            
         }
+
+        }
+
+        
+        
     }
+
+    
 
 
 

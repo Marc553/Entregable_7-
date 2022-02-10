@@ -26,10 +26,13 @@ public class SpawnManager : MonoBehaviour
     //varaibles del invoke
     private float startTmie = 2;
     private float repeatRate = 1.5f;
+    private PalyerController PlayerController;
 
 
     void Start()
     {
+        PlayerController = GameObject.Find("Player").GetComponent<PalyerController>();
+
         InvokeRepeating("SpawnObjects", startTmie, repeatRate);  //llama al spawnobject
     }
 
@@ -42,7 +45,9 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnObjects()
     {
-        randomIdex = Random.Range(0, objectsPrefabs.Length); //numero entre 0 y maximo numero d objetos d mi "objectsPrefabs"
+        if(!PlayerController.gameOver)
+        {
+            randomIdex = Random.Range(0, objectsPrefabs.Length); //numero entre 0 y maximo numero d objetos d mi "objectsPrefabs"
         SpawnPosition = RandomSpawnPosition(); //posicion del spawn
         lado = Random.Range(valor0, valor2); //decide numero entre 0 y 2 para decir si sale por la derecha o la izquerda
         if (lado == valor0)
@@ -55,6 +60,9 @@ public class SpawnManager : MonoBehaviour
           Quaternion rotation = Quaternion.Euler(transform.rotation.x, giro, transform.rotation.z);  //creo la variable que lo gire 180º
           Instantiate(objectsPrefabs[randomIdex], SpawnPosition, rotation);  //lo instancia en el lado contrario y girado 180º
         }
+
+        }
+        
         
     }
 
