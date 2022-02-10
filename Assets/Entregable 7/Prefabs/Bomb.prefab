@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 9327320296590957}
   - component: {fileID: 24429313371321499}
   - component: {fileID: 34967986875843705}
+  - component: {fileID: 1233381404}
+  - component: {fileID: 5339082569981711079}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Bomb
+  m_TagString: exprosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,3 +83,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1233381404
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11368019182273911}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.23642984
+  m_Center: {x: -0.001899004, y: 0.0029375076, z: 0.000000047683717}
+--- !u!114 &5339082569981711079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11368019182273911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af7b492916903043b21cf2d83a8fe1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

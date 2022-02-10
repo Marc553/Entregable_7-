@@ -13,19 +13,19 @@ public class PalyerController : MonoBehaviour
     
     
     private AudioSource playerAudioSource; //ruido que se escucahara al efectuar el salto
-    public AudioClip boingClip;
-    public AudioClip blipClip;
-    public AudioClip boomClip;
+    public AudioClip boingClip; //audio salto 
+    public AudioClip blipClip;  //audio recolectale
+    public AudioClip boomClip;  //audio explosión 
 
-    public ParticleSystem particleRecolectable;
-    public ParticleSystem particleExprosion;
+    public ParticleSystem particleRecolectable;  //particulas recolectable
+    public ParticleSystem particleExprosion;  //particulas explosión
  
 
     void Start()
     {
         
         playerRigidbody = GetComponent<Rigidbody>(); //entra en la componente rigidbody del player 
-        playerAudioSource = GetComponent<AudioSource>();
+        playerAudioSource = GetComponent<AudioSource>(); //entra en la componente audio source del player
     }
 
   
@@ -35,7 +35,7 @@ public class PalyerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
             playerRigidbody.AddForce(Vector3.up * playerSpeed,ForceMode.Impulse); //fuerza ejercida al player hacia arriba
-            playerAudioSource.PlayOneShot(boingClip, 1);
+            playerAudioSource.PlayOneShot(boingClip, 1); //reproduce una vez el audio de salto 
         }
 
         //Si el player pasa esta posición el juego se acaba (es el suelo)
@@ -48,25 +48,23 @@ public class PalyerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider otherCollider)
     {
-        //Si se choca con el objeto con la etiqueta llamada "recolectable" suma 1 al recolectable
+        //Si se choca con el objeto con la etiqueta llamada "recolectable" suma 1 al recolectable y reproduce el audio de recolectable
         if(otherCollider.gameObject.CompareTag("recolectable"))
         {
             recolectables++;
-            Debug.Log(recolectables);
-           //playerAudioSource.PlayOneShot(boingClip, 1);
+           playerAudioSource.PlayOneShot(blipClip, 1);
+            particleRecolectable.Play();
+            Destroy(otherCollider);
         }
-
-        if(otherCollider.gameObject.CompareTag("ground"))
+     
+        // Si se choca con el objetocon la etiqueta llamada "exprosion" reproduce el audio de explosion y acaba el juego 
+        if(otherCollider.gameObject.CompareTag("exprosion"))
         {
-            Debug.Log("funciono");
-        }
-    
-        /*if(otherCollider.gameObject.CompareTag("bomba"))
-        {
-           playerAudioSource.PlayerOneShot(boomClip, 1);
-           Time.timeScale = 0;
+           playerAudioSource.PlayOneShot(boomClip, 1);
+            particleExprosion.Play();
+            Destroy(otherCollider);
            
-        }*/
+        }
     }
 
 

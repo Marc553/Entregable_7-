@@ -9,6 +9,7 @@ TagManager:
   - Background
   - recolectable
   - ground
+  - exprosion
   layers:
   - Default
   - TransparentFX
